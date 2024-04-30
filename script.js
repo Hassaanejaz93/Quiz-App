@@ -1,3 +1,18 @@
+document.addEventListener('DOMContentLoaded', function() {
+    const loginContainer = document.getElementById('login-container');
+    const quizContainer = document.getElementById('quiz-container');
+    
+    // Check if the user is logged in (you can implement this logic)
+    const isLoggedIn = false; // Change this to true if the user is logged in
+
+    if (isLoggedIn) {
+        loginContainer.style.display = 'none';
+        quizContainer.style.display = 'block';
+    } else {
+        loginContainer.style.display = 'block';
+        quizContainer.style.display = 'none';
+    }
+
 const quizData = [
     { question: '1. What does HTML stand for?', answers: ['a) Hyper Text Markup Language','b) High Tech Markup Language','c) Hyperlink Text Markup Language','d) Home Tool Markup Language'], correctAnswer: 0 },
     { question: '2. Which technology is primarily responsible for the styling of web pages?', answers: ['a) JavaScript', 'b) HTML', 'c) CSS', 'd) Python'], correctAnswer: 2 },
@@ -17,40 +32,41 @@ const quizData = [
     { question:'15. Which of the following is a popular front-end development framework maintained by Google?', answers:['a) React','b) Angular','c) Vue.js','d) Django'],correctAnswer:1}
 ];
 
-const questionContainer = document.getElementById('question-container');
-const answersContainer = document.getElementById('answers-container');
-const submitButton = document.getElementById('submit-btn');
-const resultContainer = document.getElementById('result-container');
+    const questionContainer = document.getElementById('question-container');
+    const answersContainer = document.getElementById('answers-container');
+    const submitButton = document.getElementById('submit-btn');
+    const resultContainer = document.getElementById('result-container');
 
-let currentQuestion = 0;
-let score = 0;
+    let currentQuestion = 0;
+    let score = 0;
 
-function displayQuestion() {
-    questionContainer.innerHTML = quizData[currentQuestion].question;
-    answersContainer.innerHTML = '';
-    quizData[currentQuestion].answers.forEach((answer, index) => {
-        const answerElement = document.createElement('button');
-        answerElement.textContent = answer;
-        answerElement.addEventListener('click', () => {
-            if (index === quizData[currentQuestion].correctAnswer) {
-                score++;
-            }
+    function displayQuestion() {
+        questionContainer.innerHTML = quizData[currentQuestion].question;
+        answersContainer.innerHTML = '';
+        quizData[currentQuestion].answers.forEach((answer, index) => {
+            const answerElement = document.createElement('button');
+            answerElement.textContent = answer;
+            answerElement.addEventListener('click', () => {
+                if (index === quizData[currentQuestion].correctAnswer) {
+                    score++;
+                }
+            });
+            answersContainer.appendChild(answerElement);
         });
-        answersContainer.appendChild(answerElement);
-    });
-}
-
-function showResult() {
-    resultContainer.textContent = `Your score: ${score} out of ${quizData.length}`;
-}
-
-displayQuestion();
-
-submitButton.addEventListener('click', () => {
-    currentQuestion++;
-    if (currentQuestion < quizData.length) {
-        displayQuestion();
-    } else {
-        showResult();
     }
+
+    function showResult() {
+        resultContainer.textContent = `Your score: ${score} out of ${quizData.length}`;
+    }
+
+    displayQuestion();
+
+    submitButton.addEventListener('click', () => {
+        currentQuestion++;
+        if (currentQuestion < quizData.length) {
+            displayQuestion();
+        } else {
+            showResult();
+        }
+    });
 });
