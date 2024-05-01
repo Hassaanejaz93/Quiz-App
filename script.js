@@ -68,5 +68,41 @@ const quizData = [
         } else {
             showResult();
         }
+
+        // Function to handle registration form submission
+        document.getElementById('registration-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the form from submitting normally
+
+            // Get the username from the form
+            const username = document.getElementById('username').value;
+
+            // Simulate registration (you can replace this with your actual registration logic)
+            console.log('New user registered:', username);
+        });
+
+        // Session timer logic
+        const sessionDuration = 600; // Session duration in seconds (10 minutes)
+        let timer = sessionDuration;
+        const timerElement = document.getElementById('timer');
+
+        function startTimer() {
+            const timerInterval = setInterval(() => {
+                timer--;
+
+                // Calculate minutes and seconds
+                const minutes = Math.floor(timer / 60);
+                const seconds = timer % 60;
+
+                // Display timer in the format MM:SS
+                timerElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+                if (timer <= 0) {
+                    clearInterval(timerInterval); // Stop the timer when it reaches zero
+                    alert('Session expired. Please log in again.'); // You can customize this message
+                }
+            }, 1000); // Update timer every second
+        }
+
+        startTimer(); // Start the session timer when the page loads
     });
 });

@@ -7,6 +7,14 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+    <h2>New User Registration</h2>
+    <form id="registration-form">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+        <button type="submit">Register</button>
+    </form>
+    
     <div id="login-container">
         <h2>Login</h2>
         <form action="login.php" method="post">
@@ -25,8 +33,12 @@
         </form>
     </div>
 
+    <h3>Session Timer</h3>
+    <div id="timer"></div>
+
     <div id="quiz-container">
         <h1>Quiz App</h1>
+        
         <div id="question-container"></div>
         <div id="answers-container"></div>
         <button id="submit-btn">Submit</button>

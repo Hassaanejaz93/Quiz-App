@@ -3,7 +3,7 @@
 session_start();
 // Check if the user is logged in
 if (!isset($_SESSION['username'])) {
-    header('Location: index.html'); // Redirect to login page if not logged in
+    header('location: index.html'); // Redirect to login page if not logged in
     exit;
 }
 
@@ -35,7 +35,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
     $_SESSION['score'] = $score;
-    header('Location: result.php');
+    header('location: result.php');
+    exit;
+}
+
+// Check if the form is submitted for login
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['username'])) {
+    // Simulate user authentication (you can replace this with your actual authentication logic)
+    $username = $_POST['username'];
+    $_SESSION['username'] = $username;
+    $_SESSION['start_time'] = time(); // Store the start time of the session
+    $_SESSION['duration'] = 600; // Session duration in seconds (10 minutes)
+
+    header('Location: quiz.php'); // Redirect to quiz after login
     exit;
 }
 ?>
@@ -49,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Quiz</h1>
+    <h1>Quiz App</h1>
     <form action="" method="post">
         <?php foreach ($quizData as $index => $question): ?>
             <div class="question">
@@ -64,5 +76,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php endforeach; ?>
         <button type="submit">Submit</button>
     </form>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+<body>
+    <h1>Login</h1>
+    <form action="" method="post">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+        <button type="submit">Login</button>
+    </form>
+    <p>New User? <a href="register.php">Register Here</a></p>
 </body>
 </html>

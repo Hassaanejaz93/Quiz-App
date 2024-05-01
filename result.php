@@ -2,12 +2,12 @@
 session_start();
 
 if (!isset($_SESSION['username'])) {
-    header('Location: index.html'); // Redirect to login page if not logged in
+    header('location: index.html'); // Redirect to login page if not logged in
     exit;
 }
 
 if (!isset($_SESSION['score'])) {
-    header('Location: quiz.php'); // Redirect to quiz page if score is not set
+    header('location: quiz.php'); // Redirect to quiz page if score is not set
     exit;
 }
 
