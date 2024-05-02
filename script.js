@@ -81,28 +81,26 @@ const quizData = [
         });
 
         // Session timer logic
-        const sessionDuration = 600; // Session duration in seconds (10 minutes)
-        let timer = sessionDuration;
-        const timerElement = document.getElementById('timer');
-
         function startTimer() {
-            const timerInterval = setInterval(() => {
-                timer--;
-
-                // Calculate minutes and seconds
-                const minutes = Math.floor(timer / 60);
-                const seconds = timer % 60;
-
-                // Display timer in the format MM:SS
-                timerElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-
-                if (timer <= 0) {
-                    clearInterval(timerInterval); // Stop the timer when it reaches zero
+            timerTitle.style.display = 'block'; // Show the timer title
+            timerElement.style.display = 'block'; // Show the timer
+            const sessionDuration = 600; // Session duration in seconds (10 minutes)
+            let timeRemaining = sessionDuration;
+            updateTimerDisplay(timeRemaining); // Display initial timer value
+            timer = setInterval(() => {
+                timeRemaining--;
+                updateTimerDisplay(timeRemaining);
+                if (timeRemaining <= 0) {
+                    clearInterval(timer); // Stop the timer when it reaches zero
                     alert('Session expired. Please log in again.'); // You can customize this message
                 }
             }, 1000); // Update timer every second
         }
 
-        startTimer(); // Start the session timer when the page loads
+        function updateTimerDisplay(secondsRemaining) {
+            const minutes = Math.floor(secondsRemaining / 60);
+            const seconds = secondsRemaining % 60;
+            timerElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
     });
 });

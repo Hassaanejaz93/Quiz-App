@@ -4,7 +4,7 @@
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['username'])) {
     // Process registration form data
     $username = $_POST['username'];
-    // Your registration logic here...
+    $password = $_POST['password'];
     header('Location: login.php'); // Redirect to login after registration
     exit;
 }
@@ -22,6 +22,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['username'])) {
     <form action="" method="post">
         <label for="username">Newuser:</label>
         <input type="text" id="username" name="username" required>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
         <button type="submit">Register</button>
     </form>
 </body>
